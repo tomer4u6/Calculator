@@ -11,20 +11,24 @@ public class CreditsActivity extends AppCompatActivity {
     TextView tv;
     ImageButton btn;
     double sum;
+    Intent back;
+    String st;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
         tv = (TextView) findViewById(R.id.tv);
         btn = (ImageButton) findViewById(R.id.btn);
-        tv.setText("Last result: "+getIntent().getExtras().getString("result","*`*"));
-        sum = getIntent().getExtras().getDouble("sum",0.0);
+        back = getIntent();
+        st = back.getExtras().getString("result", "**--*");
+        tv.setText("Last result: "+ st);
     }
 
     public void ret(View view) {
-        Intent t = new Intent(this, MainActivity.class);
-        t.putExtra("res", sum);
-        startActivity(t);
+        back.putExtra("res", Double.toString(Double.parseDouble(st))+" OK");
+        setResult(RESULT_OK, back);
+        finish();
     }
 }
 

@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         btnE = (Button) findViewById(R.id.btnE);
         btnC = (Button) findViewById(R.id.btnC);
         cdts = (Button) findViewById(R.id.cdts);
-        if(getIntent().getExtras()!=null)
-            tmp = getIntent().getExtras().getDouble("res", -3.14);
     }
 
     public void add(View view) {
@@ -223,6 +221,13 @@ public class MainActivity extends AppCompatActivity {
             t.putExtra("result", st);
             t.putExtra("sum", sum);
         }
-        startActivity(t);
+        startActivityForResult(t,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        st = data.getExtras().getString("res");
+        et.setHint(st);
     }
 }
